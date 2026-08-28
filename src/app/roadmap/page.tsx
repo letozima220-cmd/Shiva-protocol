@@ -1,7 +1,8 @@
+import MobileDock from "@/components/MobileDock";
+
 export default function RoadmapPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0f] text-white pb-24">
-      {/* Header */}
       <header className="sticky top-0 z-20 backdrop-blur-xl bg-black/40 border-b border-white/5 px-4 py-3 flex items-center justify-between">
         <div>
           <h1 className="text-lg font-semibold">Roadmap</h1>
@@ -10,7 +11,6 @@ export default function RoadmapPage() {
       </header>
 
       <div className="px-4 pt-6 space-y-6 max-w-lg mx-auto">
-        {/* Timeline */}
         <div className="space-y-4">
           {[
             {
@@ -85,30 +85,7 @@ export default function RoadmapPage() {
         </p>
       </div>
 
-      {/* Bottom dock */}
-      <nav className="fixed bottom-0 left-0 right-0 z-30 border-t border-white/8 bg-black/70 backdrop-blur-xl">
-        <div className="max-w-lg mx-auto flex items-center justify-around py-3 px-2">
-          {["Home", "Lab", "Market", "Earn", "Profile"].map((label) => (
-            <button
-              key={label}
-              className={`flex flex-col items-center gap-1 min-w-[56px] ${
-                label === "Home" ? "text-amber-400" : "text-white/40"
-              }`}
-            >
-              <div
-                className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm ${
-                  label === "Home"
-                    ? "bg-amber-500/20 border border-amber-500/30"
-                    : "bg-white/5"
-                }`}
-              >
-                {label[0]}
-              </div>
-              <span className="text-[10px]">{label}</span>
-            </button>
-          ))}
-        </div>
-      </nav>
+      <MobileDock />
     </main>
   );
 }
