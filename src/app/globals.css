@@ -2,32 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Базовые стили */
+/* ========================================
+   БАЗОВЫЕ СТИЛИ
+   ======================================== */
 @layer base {
+  * {
+    @apply border-border;
+  }
+
   body {
     @apply bg-[#0a0b1e] text-white antialiased;
-    background-image: 
-      radial-gradient(ellipse at 20% 50%, rgba(167,139,250,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(96,165,250,0.06) 0%, transparent 50%);
     min-height: 100vh;
+    
+    /* Два светящихся орба для глубины фона */
+    background-image: 
+      radial-gradient(ellipse at 20% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(96, 165, 250, 0.06) 0%, transparent 50%);
+  }
+
+  /* Кастомный скроллбар */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, 0.3);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(167, 139, 250, 0.5);
+  }
+
+  /* Выделение текста */
+  ::selection {
+    background: rgba(167, 139, 250, 0.3);
+    color: #fff;
   }
 }
 
-/* Кастомные утилиты */
+/* ========================================
+   КАСТОМНЫЕ УТИЛИТЫ
+   ======================================== */
 @layer utilities {
+  /* --- Стеклянный эффект (Glassmorphism) --- */
   .glass {
     @apply bg-white/5 backdrop-blur-xl border border-white/10;
   }
   
+  /* --- Стекло с ховер-эффектом --- */
   .glass-hover {
-    @apply transition-all duration-300 hover:bg-white/10 hover:border-purple-500/30 hover:-translate-y-1;
+    @apply transition-all duration-300 ease-in-out;
   }
   
+  .glass-hover:hover {
+    @apply bg-white/10 border-purple-500/30 -translate-y-1;
+    box-shadow: 0 8px 32px rgba(167, 139, 250, 0.1);
+  }
+  
+  /* --- Градиентный текст с анимацией --- */
   .gradient-text {
-    @apply bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent;
+    background-size: 200% 100%;
+    animation: shimmerText 3s ease-in-out infinite;
   }
   
+  /* --- Фиолетовое свечение --- */
   .glow-purple {
-    box-shadow: 0 0 40px rgba(167,139,250,0.15);
+    box-shadow: 0 0 40px rgba(167, 139, 250, 0.15);
+  }
+  
+  /* --- Голубое свечение --- */
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(96, 165, 250, 0.12);
+  }
+  
+  /* --- Анимированная пульсация --- */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+}
+
+/* ========================================
+   КЛЮЧЕВЫЕ КАДРЫ (АНИМАЦИИ)
+   ======================================== */
+@layer utilities {
+  @keyframes shimmerText {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  /* --- Готовые классы анимаций --- */
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    background: linear-gradient(90deg, 
+      rgba(167, 139, 250, 0.1) 0%, 
+      rgba(167, 139, 250, 0.3) 50%, 
+      rgba(167, 139, 250, 0.1) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
   }
 }
